@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    {% load sorl_thumbnail %}
+  <title>주문자 현황</title>
+  <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+<style>
+
+
+  * {
+ 	 	font-family: HanSans;
+	}
+
+	body {
+   		margin: 0;
+	}
+
+	.section {
+   		float: left;
+   		width: 100%;
+	}
+
+
+    #header-area {
+   		float: left;
+   		height:30%;
+   		margin:auto;
+   		text-align:center;
+   		font-size:18px;
+   		line-height:30%;
+   		padding-top: 8px;
+        background: linear-gradient(rgb(237, 199, 195),#fffff8 );
+
+   }
+
+   .name{
+        float:left;
+    	padding-left:5%;
+    	padding-top:2%;
+   }
+
+  .main{
+    	float:right;
+    	width:2.6%;
+    	padding-right:5%;
+    	padding-top:12px;
+
+    }
+    .lo{
+        padding-right:5%;
+   }
+     .b{
+      border: none;
+      font-size: 15px;
+      outline:none;
+      text-align: center;
+      background-color: transparent ;
+      text-decoration:none;
+      color:black;
+      padding:0 20px;
+    }
+
+
+     .menu{
+        width:100%;
+        text-align:center;
+      }
+  .b:hover{
+     color: white;
+     background-color: rgb(231, 76, 60);
+    }
+
+span{
+       padding-left: 50px;
+    }
+
+
+
+#main-area {
+  float: left;
+  margin-bottom: 60px;
+  }
+
+.pd_img {
+    height: 200px;
+  }
+.con{
+    width: 75%;
+    margin: 0 auto;
+margin-top:2%;
+  height:450px;
+  text-align:center;
+  padding-top:5%;
+}
+.pd{
+  float: left;
+  text-align: center;
+  width:25%;
+  font-size: 20px;
+  }
+
+.fo {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ table {
+    width:100%;
+    border-bottom: 1px solid rgba(86, 187, 255, 0.57);
+    border-top: 1px solid rgba(86, 187, 255, 0.57);
+    border-collapse: collapse;
+    border-right: none;
+    border-left: none;
+    font-size: 16px;
+  }
+
+  th, td {
+    text-align:center;
+    padding: 10px;
+  }
+
+tr{
+    border-bottom: 1px solid rgba(86, 187, 255, 0.57);
+
+}
+  th {
+     border-right:1px solid rgba(86, 187, 255, 0.57);
+    font-weight: bold;
+  }
+  .h{
+    background-color:rgba(86, 187, 255, 0.57);
+    border-bottom:1px solid rgba(86, 187, 255, 0.57);
+    border-right:none;
+    text-align:center;
+  }
+
+   .h1{
+    background-color:rgba(86, 187, 255, 0.57);
+    border-bottom:1px solid rgba(86, 187, 255, 0.57);
+    border-right:1px solid rgba(86, 187, 255, 0.57);
+
+  }
+
+  .h2{
+   border-style:none;
+   width: 80px;
+   text-align: center;
+  }
+
+.font2 {
+  border-left:none;
+  border-bottom:1px solid rgba(86, 187, 255, 0.57);
+   border-top:none;
+   border-right:none;
+  text-align: center;
+
+}
+
+
+.font {
+  float: left;
+  padding-top: 20px;
+  margin-right: 20px;
+  border-style: none;
+}
+
+.font2 {
+  border-style: none;
+}
+.detail{
+  float: left;
+  padding-left:15%;
+  margin-bottom: 60px;
+  font-size: 20px;
+  width:60%;
+}
+p{
+    margin:0px;
+}
+#number{
+    padding:0;
+}
+.onum{
+    margin-top:2%;
+   font-size:17px;
+    margin-left:5%;
+    float:left;
+    padding:0.5%;
+    border:0.5px solid rgb(244, 244, 244);
+    background-color:rgb(244, 244, 244);
+
+}
+#number{
+ font-weight: bold;
+ color:rgb(49, 93, 140);
+}
+
+</style>
+</head>
+<body>
+<div id="header-area" class="section">
+    <span class="name">주문 현황</span>
+  <span><a href="{% url 'index' %}"><img src="{% static 'img/tws.png' %}" width=8%; class="lo" align="center"></a></span>
+   <span>   <a href="{% url 'photo:main' %}"><img src="{% static 'img/home.png' %}"  class="main"></a></span>
+</div>
+
+<hr>
+<div class="menu">
+      <a id="button" class="b" href="{% url 'photo:product_add' %}">&nbsp;제품등록&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_change' %}">&nbsp;제품관리&nbsp;</a>
+      <a id="button" class="b" href="{% url 'photo:product_control' %}">&nbsp;재고관리&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_real' %}">&nbsp;실시간 창고현황&nbsp;</a>
+  </div>
+<hr>
+
+<div id="main-area" class="section">
+    <div class="onum">주문 수 &nbsp; <span  id="number"></span></div>
+    <br>
+  <div class="con">
+
+      <div class="pd">
+         {% thumbnail object.pimage "128x128" crop="center" as im %}
+            <img src="{{ im.url }}" class="pd_img" >
+            {% endthumbnail %}
+        <p class="fo" class="pdname">{{ object.pname }}</p>
+        <p class="fo" class="pdprice">{{ object.pcost }}</p>
+        <hr>
+        <p class="fo" class="place">보관장소 &nbsp; {{ object.pstore }}</p>
+      </div>
+
+       <div class="detail">
+  {% for order in object.order_set.all %}
+
+  <table border="1" id="myTable">
+
+      <tr>
+      <th class="h1">주문번호 </th>
+          <td class="h"><p id="num">{{ order.id }}</p></td>
+    </tr>
+ <tr>
+      <th class="h2">주문자</th><td class="font2">{{ order.oname }}</td>
+    </tr>
+
+      <tr>
+      <th class="h2">주소</th><td class="font2">{{ order.oaddress }}</td>
+    </tr>
+
+    <tr>
+      <th class="h2">연락처</th><td class="font2">{{ order.ocall }}
+      </td>
+    </tr>
+
+    <tr>
+      <th class="h2">이메일</th><td class="font2">{{ order.oemail }}
+    </tr>
+
+       <tr>
+      <th class="h2">배송메모</th><td class="font2">{{ order.omemo }}
+    </tr>
+
+
+
+    </table>
+<br>
+           <br>
+      {% endfor %}
+
+       </div>
+
+
+    </div>
+
+</div>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+
+$(document).ready(function(){
+
+var table = $('#myTable p').length;
+
+$('#number').html(table);
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>

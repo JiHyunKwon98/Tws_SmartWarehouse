@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% load widget_tweaks %}
+
+<head>
+	<title>제품등록</title>
+	 <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+	 <style type="text/css">
+
+
+	 * {
+        font-family: HanSans;
+
+   }
+
+   body {
+         margin: 0;
+   }
+
+   .section {
+         float: left;
+         width: 100%;
+   }
+   span{
+    	padding-left: 50px;
+    }
+
+    .main{
+    	float: right;
+    	width:2.6%;
+    	padding-right:75px;
+    	padding-top:20px;
+    }
+
+   #content-area {
+     	padding-top:2%;
+   }
+
+	#form-area {
+     	margin: auto;
+    	width: 80%;
+    	font-size:15px;
+   }
+
+
+  input[type="text"]{
+	  border-bottom:0.7px solid gray;
+   	  border-top:none;
+   	  border-left:none;
+      border-right:none;
+      outline: none;
+      width: 15%;
+    }
+   .submit {
+      color: rgb(86, 187, 255);
+      padding: 10px 35px;
+      font-size: 15px;
+      border-radius: 100%;
+      outline: 0;
+      border:1px solid rgb(86, 187, 255);
+      background-color: white;
+      margin-left:50%;
+   }
+
+	.submit:hover{
+		color:white;
+		background-color: rgb(86, 187, 255);
+	}
+
+
+  .b{
+      border: none;
+      font-size: 15px;
+      outline:none;
+      text-align: center;
+      background-color: transparent ;
+      text-decoration:none;
+      color:black;
+      padding:0 20px;
+    }
+
+
+     .menu{
+        width:100%;
+        text-align:center;
+      }
+  .b:hover{
+     color: white;
+     background-color: rgb(231, 76, 60);
+    }
+
+.sus{
+  margin: 100px 0px 70px 0px;
+  text-align: center;
+  font-size: 25px;
+ }
+
+ #ok{
+
+      color:rgb(251, 215, 134);
+      font-size: 20px;
+      border-radius: 10%;
+      outline: 0;
+      border:1px solid rgb(251, 215, 134);
+      background-color: white;
+
+ }
+
+  #ok:hover{
+    color:white;
+    background-color:rgb(251, 215, 134);
+  }
+
+
+    #header-area {
+   		float: left;
+   		height:30%;
+   		margin:auto;
+   		text-align:center;
+   		font-size:18px;
+   		line-height:30%;
+   		padding-top: 8px;
+        background: linear-gradient(rgb(237, 199, 195),#fffff8 );
+
+   }
+
+   .name{
+        float:left;
+    	padding-left:5%;
+    	padding-top:2%;
+   }
+
+  .main{
+    	float:right;
+    	width:2.6%;
+    	padding-right:5%;
+    	padding-top:12px;
+
+    }
+    .lo{
+        padding-right:5%;
+   }
+   #ob{
+        padding:0;
+   }
+
+	</style>
+
+</head>
+<body>
+
+<div id="header-area" class="section">
+    <span class="name">제품 삭제</span>
+  <span><a href="{% url 'index' %}"><img src="{% static 'img/tws.png' %}" width=8%; class="lo" align="center"></a></span>
+   <span>   <a href="{% url 'photo:main' %}"><img src="{% static 'img/home.png' %}"  class="main"></a></span>
+</div>
+
+<hr>
+<div class="menu">
+      <a id="button" class="b" href="{% url 'photo:product_add' %}">&nbsp;제품등록&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_change' %}">&nbsp;제품관리&nbsp;</a>
+      <a id="button" class="b" href="{% url 'photo:product_control' %}">&nbsp;재고관리&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_real' %}">&nbsp;실시간 창고현황&nbsp;</a>
+  </div>
+<hr>
+
+
+
+</div>
+
+<div id="content-area" class="section">
+
+   <form action="." method="post" class="sus">
+       {% csrf_token %}
+    <p >
+        제품과 관련된 정보와 주문현황 목록이 전부 삭제됩니다.
+        <br>
+        삭제하실겁니까?
+        <br>
+        <br>
+       제품명 - <span id="ob"> "{{ object }}"</span></p>
+       <input type="submit" value="삭제" id="ok" class="btn-danger btn-sm" />
+
+   </form>
+
+</div>
+<!--
+<script>
+
+    var btn=document.getElementById('ok');
+    var xhr=new XMLHttpRequest();
+    var ob = document.getElementById("ob").innerHTML;
+
+    btn.addEventListener("click", function(){simple(ob);});
+
+    function simple(event) {
+        xhr.open("POST", window.location.href, true);
+        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            'message': event+"제품을 삭제하였습니다."
+        }));
+    };
+
+
+
+</script>
+-->
+</body>
+
+</html>

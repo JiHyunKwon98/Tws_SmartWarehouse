@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+  <title>TWS</title>
+  <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+<style>
+
+* {
+	font-family: HanSans;
+	background-color: #fffff8;
+}
+body {
+	margin: 0;
+}
+.section {
+	float: left;
+	width: 100%;
+}
+
+#header-area {
+	float: left;
+	height: 30%;
+	margin: 0px 0px;
+
+	}
+
+img{
+	margin-left: 50px;
+	margin-top: 10px;
+}
+#main-area {
+	position: absolute;
+	left: 50%;
+ 	top: 50%;
+ 	margin-top: -219px;
+ 	margin-left: -438px;
+ 	width: 876px;
+	}
+
+ .mainbox{
+ 	left: 50%; right: 50%;
+ 	margin-left:
+ 	margin-right: -175px;
+ 	float: left;
+ 	margin: 5%;
+ 	height: 340px;
+ 	width: 340px;
+ 	background-color: rgb(255, 214, 177);
+ 	text-align: center;
+ 	font-weight: bold;
+ 	font-size: 30px;
+ 	border-radius: 38px;
+ 	line-height: 350px;
+    }
+.mainbox:hover{
+	box-shadow: -8px -9px 29px rgba(0, 0, 0, 0.33) inset;
+}
+    a {
+    	color: black;
+    }
+</style>
+</head>
+<body>
+
+<div id="header-area" class="section">
+	<img src="{% static 'img/tws.png' %}" width=8%; >
+</div>
+
+<div id="main-area" class="section">
+	<a href="{% url 'login1' %}"><div class="mainbox">소상공인으로 시작하기</div></a>
+	<a href="{% url 'photo:index' %}"><div class="mainbox">쇼핑하러 가기</div></a>
+</div>
+
+</body>
+</html>

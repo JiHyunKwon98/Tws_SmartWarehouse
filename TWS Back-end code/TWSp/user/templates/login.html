@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TWS</title>
+  <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+<style>
+
+* {
+	font-family: HanSans;
+	background-color: #fffff8;
+}
+body {
+	margin: 0;
+}
+.section {
+	float: left;
+	width: 100%;
+}
+
+#header-area {
+	float: left;
+	height: 30%;
+	margin: 0px 0px;
+	}
+
+img{
+	margin-left: 50px;
+	margin-top: 10px;
+}
+
+#main-area {
+	float: left;
+	margin-top: 100px;
+	}
+
+    .gy{
+    	text-align: center;
+    	margin-bottom: 20px;
+    	font-size: 45px;
+    	font-weight: bold;
+    }
+    .si{
+    	border:0px;
+    	position: absolute;
+    	left: 50%;
+    	margin-left: -195px;
+    	width: 390px;
+    	margin-top: 20px;
+    	margin-bottom: 50px;
+    }
+    .sel input {
+    	font-size: 19px;
+    	border-style: none none solid none;
+    	margin: 15px;
+    }
+    .submit {
+    	position: absolute;
+    	left: 50%;
+    	margin-left: -65px;
+		margin-top: 35px;
+		background-color: white;
+		color: rgb(86, 187, 255);
+		padding: 10px 35px;
+		font-size: 19px;
+		border-radius: 100%;
+		border-style: solid;
+		border-color: rgb(86, 187, 255);
+	}
+	.submit:hover{
+      color:white;
+      background-color: rgb(86, 187, 255);
+   }
+	.sg3 {
+		width: 360px;
+	}
+	.sg {
+		position: absolute;
+    	left: 50%;
+    	margin-left:-105px;
+		margin-top: 140px;
+		color: gray;
+	}
+</style>
+</head>
+<body>
+
+<div id="header-area" class="section"><a href="index.html">
+	<img src="img/tws.png" width=8%;></a>
+</div>
+
+<div id="main-area" class="section">
+	<div class="gy">TWS 로그인</div>
+	<div class="si">
+	<form method="post" action="">
+        {% csrf_token %}
+	<div class="sel">
+	<input id="id" class="sg3" placeholder="ID" type="text" name="id"><br>
+	<input id="pw" class="sg3" placeholder="PASSWORD" type="password" name="pw"><br>
+    </div>
+    <input class="submit" type="submit" name="login" value="로그인">
+	<p class="sg">회원이 아니신가요? <a id="signup" href="{% url 'signup' %}" title="회원가입">회원가입</a></p>
+</form>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% load sorl_thumbnail %}
+
+<head>
+	<title>상품목록</title>
+	 <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+	 <style type="text/css">
+
+
+
+   * {
+        font-family: HanSans;
+
+   }
+
+   body {
+         margin: 0;
+   }
+
+   .section {
+         float: left;
+         width: 100%;
+   }
+
+
+
+   span{
+       padding-left: 50px;
+    }
+
+   #content-area {
+      padding-top: 1%;
+      width: 75%;
+      margin: 0 auto;
+      padding-left:12%;
+      padding-bottom: 15px;
+      font-size: 18px;
+   }
+
+
+   #box{
+    border:none;
+    float: left;
+    width:16%;
+    margin: 0.5% 4%;
+    margin-bottom:2.5%;
+    text-align: center;
+   }
+   #box:hover{
+    opacity: 0.5;
+   }
+   .pimage{
+    width:100%;
+    float: center;
+   }
+    .submit{
+     float:right;
+     margin-right:75px;
+     margin-top: 15px;
+     font-size: 18px;
+     background-color:rgb(41, 128, 185);
+     border-color: rgb(41, 128, 185);
+     padding:10px;
+     border-radius: 2px;
+     border-style: solid;
+     color: white;
+    }
+
+
+
+    .cate{
+        font-weight: normal;
+    }
+
+    .u{
+        color:rgb(41, 128, 185);
+        padding-left:0px;
+    }
+           #header-area {
+   		float: left;
+   		height:30%;
+   		margin:auto;
+   		text-align:center;
+   		font-size:18px;
+   		line-height:30%;
+   		padding-top: 8px;
+        background: linear-gradient(rgb(237, 199, 195),#fffff8 );
+
+   }
+
+   .name{
+        float:left;
+    	padding-left:5%;
+    	padding-top:2%;
+   }
+
+  .main{
+    	float:right;
+    	width:2.6%;
+    	padding-right:5%;
+    	padding-top:12px;
+
+    }
+      #put{
+    padding-left:0px;
+    font-size:15px;
+    font-weight:bold;
+     color:rgb(211, 84, 0);
+    }
+    #su{
+    font-size:15px;
+     padding:2%;
+     background-color:rgba(231, 76, 60, 0.07);
+
+    }
+     .pimage{
+    width:100%;
+    float: center;
+    margin-top:7%;
+   }
+
+
+	 </style>
+</head>
+<body>
+
+<div id="header-area" class="section">
+    <span class="name">상품 목록</span>
+  <span><a href="{% url 'index' %}"><img src="{% static 'img/tws.png' %}" width=8%; class="lo" align="center"></a></span>
+   <span>     <a  class="submit" href="{% url 'photo:order_add' %}" style="text-decoration:none;" >
+        주문하기
+    </a></span>
+</div>
+
+<div id="content-area" class="section">
+    <div >
+       <br>
+        <a class="cate"style="text-decoration:none; color:black; " >
+          {{ object.name }} - {{ object.description }}
+        </a>
+
+ <span></span><hr>
+    </div>
+
+    {% for product in object.product_set.all %}
+    <div id="box">
+        <span id="su"> 재고  <span id="put">{{product.stock}} </span>개</span>
+       <a href="{{ product.get_absolute_url }}" >
+             {% thumbnail product.pimage "128x128" crop="center" as im %}
+            <img src="{{ im.url }}" class="pimage" style="width:100%;">
+            {% endthumbnail %}
+
+        </a>
+
+
+        <br><br>
+    <a name="pname">{{ product.pname }}</a>
+    <a name="pcost">{{ product.pcost }}</a>
+    </div>
+    {% endfor %}
+
+
+</div>
+
+</body>
+
+</html>

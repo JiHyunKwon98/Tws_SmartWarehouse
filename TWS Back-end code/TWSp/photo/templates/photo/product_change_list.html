@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% load sorl_thumbnail %}
+<head>
+	<title>제품관리-1</title>
+	 <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+	 <style type="text/css">
+
+
+	* {
+ 	 	font-family: HanSans;
+	}
+
+	body {
+   		margin: 0;
+	}
+
+	.section {
+   		float: left;
+   		width: 100%;
+	}
+
+
+
+   span{
+      padding-left: 50px;
+    }
+
+    .main{
+    	float: right;
+    	width:2.6%;
+    	padding-right:75px;
+    	padding-top:20px;
+    }
+
+   #content-area {
+
+      width: 92%;
+      margin: 0 auto;
+      padding-left:8%;
+
+   }
+
+
+   #product{
+    vertical-align:middle;
+    margin-top:10px;
+
+   }
+
+   .pimage{
+      margin-left:7%;
+      margin-right: 2%;
+   }
+
+   p{
+    display: inline-block;
+    vertical-align:middle;
+    text-align: center;
+    font-size: 18px;
+    margin-right: 2%;
+   }
+
+  .srow{
+
+    margin-top:10px;
+    display: inline-block;
+    padding-top:10px;
+
+
+  }
+
+  .d{
+    display: inline-block;
+    text-align: center;
+
+  }
+
+  .delete{
+      padding:3px;
+      color:rgb(251, 215, 134);
+      font-size: 16px;
+      border-radius: 10%;
+      outline: 0;
+      border:1px solid rgb(251, 215, 134);
+      background-color: white;
+
+  }
+
+
+  .delete:hover{
+    color:white;
+    background-color: rgb(251, 215, 134);
+  }
+
+  .detail{
+      padding:3px;
+      color:rgb(86, 187, 255);
+      font-size: 15px;
+      border-radius: 10%;
+      outline: 0;
+      border:1px solid rgb(86, 187, 255);
+      background-color: white;
+
+  }
+
+  .detail:hover{
+    color:white;
+    background-color:rgb(86, 187, 255);
+  }
+
+  .n{
+     font-size:15px;
+     margin-left:100px;
+  }
+
+
+    .b{
+      border: none;
+      font-size: 15px;
+      outline:none;
+      text-align: center;
+      background-color: transparent ;
+      text-decoration:none;
+      color:black;
+      padding:0 20px;
+    }
+
+
+     .menu{
+        width:100%;
+        text-align:center;
+      }
+  .b:hover{
+     color: white;
+     background-color: rgb(231, 76, 60);
+    }
+
+    a{
+         text-decoration:none;
+    }
+
+    .ju{
+    background:rgba(241, 144, 59, 0.65);
+    color:white;
+    float:right;
+    padding:5px;
+    margin-right:5%;
+    margin-top:1%;
+    }
+
+    #header-area {
+   		float: left;
+   		height:30%;
+   		margin:auto;
+   		text-align:center;
+   		font-size:18px;
+   		line-height:30%;
+   		padding-top: 8px;
+        background: linear-gradient(rgb(237, 199, 195),#fffff8 );
+
+   }
+
+   .name{
+        float:left;
+    	padding-left:5%;
+    	padding-top:2%;
+   }
+
+  .main{
+    	float:right;
+    	width:2.6%;
+    	padding-right:5%;
+    	padding-top:12px;
+
+    }
+    .lo{
+        padding-right:5%;
+   }
+       .s{
+    float:right;
+    padding:5px;
+    margin-right:3%;
+    margin-top:1%;
+
+    text-decoration:none;
+     background:#A5DF00;
+    color:white;
+
+    }
+
+
+
+	 </style>
+</head>
+<body>
+
+<div id="header-area" class="section">
+    <span class="name">제품 관리</span>
+  <span><a href="{% url 'index' %}"><img src="{% static 'img/tws.png' %}" width=8%; class="lo" align="center"></a></span>
+   <span>   <a href="{% url 'photo:main' %}"><img src="{% static 'img/home.png' %}"  class="main"></a></span>
+</div>
+
+<hr>
+<div class="menu">
+      <a id="button" class="b" href="{% url 'photo:product_add' %}">&nbsp;제품등록&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_change' %}">&nbsp;제품관리&nbsp;</a>
+      <a id="button" class="b" href="{% url 'photo:product_control' %}">&nbsp;재고관리&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_real' %}">&nbsp;실시간 창고현황&nbsp;</a>
+  </div>
+<hr>
+<br>
+<a class="ju" href="{% url 'photo:order_list' %}">주문자 정렬</a>
+ <a  class="s"href="{% url 'photo:input_product' %}" target="_blank"
+    onClick="window.open(this.href, '', 'width=300, height=300'); return false;"
+    >입고처리</a>
+
+<div id="content-area" class="section">
+
+{% for item in object_list %}
+<div id="product">
+ {% thumbnail item.pimage "128x128" crop="center" as im %}
+            <img src="{{ im.url }}" class="pimage" width=11.5%; align="middle">
+  {% endthumbnail %}
+
+ <p>
+
+   <span class="frow">
+   <a name="pname">{{ item.pname }}</a>&nbsp;&nbsp;
+
+   <a name="pcost">{{ item.pcost }}</a>
+   <br>
+   </span>
+   <span class="srow">
+        보관 장소<a name="pstore"> {{ item.pstore }}</a>&nbsp;&nbsp;
+        <a  class="detail" href="{% url 'photo:order_detail' item.id %}" style="text-decoration:none;" >
+            주문현황
+         </a>
+
+   </span>
+    </p>
+
+     <span class="d">
+         <a href="{% url 'photo:product_delete' item.id %}" class="delete">삭제</a>
+         <a class="n">등록 날짜 - {{ item.upload_dt }}</a>
+    </span>
+
+
+</div>
+
+<br>{% endfor %}
+
+</div>
+
+</body>
+
+</html>

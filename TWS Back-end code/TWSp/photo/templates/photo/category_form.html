@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% load widget_tweaks %}
+
+<head>
+	<title>제품등록</title>
+	 <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+	 <style type="text/css">
+
+	* {
+ 	 	font-family: HanSans;
+	}
+
+	body {
+   		margin: 0;
+	}
+
+	.section {
+   		float: left;
+   		width: 100%;
+	}
+
+
+
+
+   span{
+    	padding-left: 50px;
+    }
+
+    .main{
+    	float: right;
+    	width:2.6%;
+    	padding-right:75px;
+    	padding-top:20px;
+    }
+
+   #content-area {
+     	padding-top:2%;
+   }
+
+	#form-area {
+     	margin: auto;
+    	width: 80%;
+    	font-size:15px;
+   }
+
+   input[type="text"]{
+	   border-bottom:0.7px solid gray;
+   	  border-top:none;
+   	  border-left:none;
+      border-right:none;
+      outline: none;
+      width: 15%;
+
+    }
+
+   .submit {
+      color: rgb(86, 187, 255);
+      padding: 10px 35px;
+      font-size: 15px;
+      border-radius: 100%;
+      outline: 0;
+      border:1px solid rgb(86, 187, 255);
+      background-color: white;
+      margin-left:50%;
+   }
+
+	.submit:hover{
+		color:white;
+		background-color: rgb(86, 187, 255);
+	}
+
+  .b{
+      border: none;
+      font-size: 15px;
+      outline:none;
+      text-align: center;
+      background-color: transparent ;
+      text-decoration:none;
+      color:black;
+      padding:0 20px;
+    }
+
+
+     .menu{
+        width:100%;
+        text-align:center;
+      }
+  .b:hover{
+     color: white;
+     background-color: rgb(231, 76, 60);
+    }
+
+
+    #header-area {
+   		float: left;
+   		height:30%;
+   		margin:auto;
+   		text-align:center;
+   		font-size:18px;
+   		line-height:30%;
+   		padding-top: 8px;
+        background: linear-gradient(rgb(237, 199, 195),#fffff8 );
+
+   }
+
+   .name{
+        float:left;
+    	padding-left:5%;
+    	padding-top:2%;
+   }
+
+  .main{
+    	float:right;
+    	width:2.6%;
+    	padding-right:5%;
+    	padding-top:12px;
+
+    }
+    .lo{
+        padding-right:5%;
+   }
+
+	</style>
+
+</head>
+<body>
+
+
+<div id="header-area" class="section">
+    <span class="name">제품 등록</span>
+  <span><a href="{% url 'index' %}"><img src="{% static 'img/tws.png' %}" width=8%; class="lo" align="center"></a></span>
+   <span>   <a href="{% url 'photo:main' %}"><img src="{% static 'img/home.png' %}"  class="main"></a></span>
+</div>
+
+<hr>
+<div class="menu">
+      <a id="button" class="b" href="{% url 'photo:product_add' %}">&nbsp;제품등록&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_change' %}">&nbsp;제품관리&nbsp;</a>
+      <a id="button" class="b" href="{% url 'photo:product_control' %}">&nbsp;재고관리&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_real' %}">&nbsp;실시간 창고현황&nbsp;</a>
+  </div>
+
+<hr>
+
+</div>
+
+<div id="content-area" class="section">
+
+    <div id="form-area">
+    {% if form.erros %}
+    <div class="alert alert-danger">
+        <div class="font-weight-bold">Wrong! Please correct the error(s) below</div>
+        {{ form.errors }}
+    </div>
+    {% endif %}
+
+    {% if form.is_multipart or formset.is_multipart %}
+    <form enctype="multipart/form-data" action="" method="post" class="card pt-3">
+     {% else %}
+     <form action="." method="post" class="card pt-3">
+     {% endif %}
+     {% csrf_token %}
+
+         <div class="form-group row">
+              {{ form.name|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+                <span class="col-sm-5" id="text" >
+                    {{ form.name|add_class:"form-control"|attr:"autofocus" }}
+                </span>
+         </div>
+         <br>
+         <div class="form-group row">
+              {{ form.description|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+                <span class="col-sm-5" id="text">
+                    {{ form.description|add_class:"form-control" }}
+                </span>
+         </div>
+
+        <br>
+
+
+         <input class="submit" type="submit" value="확인">
+         <br>
+         <br>
+
+     </form>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

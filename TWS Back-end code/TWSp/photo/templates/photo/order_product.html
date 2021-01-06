@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+ <style type="text/css">
+
+
+  * {
+        font-family: HanSans;
+         background-color:#A5DF00;
+         color: white;
+         font-weight:bold;
+
+   }
+
+   body {
+         margin: 0;
+   }
+  table {
+    width: 100%;
+    border:none;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 15px;
+    margin-top: 8%;
+  }
+  h5{
+      font-weight:bold;
+      font-size : 16px;
+    }
+
+    th{
+        font-size :18px;
+    }
+
+
+
+
+ </style>
+   <title>주문번호</title>
+    <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+
+</head>
+<body>
+
+<div id="header-area" class="section">
+
+</div>
+
+<div id="content-area" class="section">
+
+<div id="box">
+
+    <table id="able">
+      <thead>
+        <tr>
+          <th>주문번호</th><th>보관장소</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+     {% if store_list %}
+
+      {% for order in store_list %}
+
+        <tr>
+            <td>
+                <h5>
+                    {{order.id}}
+                </h5>
+
+              </td>
+
+            <td >
+
+
+                <span>
+                  {% for order_product in order.order_product_set.all %}
+
+                  {{order_product.product.pstore}}
+
+                  {% endfor %}
+
+                 </span>
+
+                  </td>
+
+        </tr>
+
+      {% endfor %}
+
+{% endif %}
+      </tbody>
+    </table>
+</div>
+
+
+</div>
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+    var storeResult = [];
+    var stores = Array.prototype.slice.call(document.getElementById("able").getElementsByTagName("span"));
+
+    stores.forEach(function logArrayElements(element, index, array) {
+            if (element.innerText && element.innerText != "undefined") {
+              storeResult.unshift(element.innerText);
+             }
+          });
+
+        storeResult.reverse();
+
+        var dataJSON = JSON.stringify(storeResult);
+
+        $.ajax({
+        type: 'POST',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('X-CSRFToken','{{ csrf_token }}');
+        },
+        data: {'storeResult[]': storeResult },
+    });
+
+    var orderResult = [];
+    var orders = Array.prototype.slice.call(document.getElementById("able").getElementsByTagName("h5"));
+
+   orders.forEach(function logArrayElements(element, index, array) {
+            if (element.innerText && element.innerText != "undefined") {
+              orderResult.unshift(element.innerText);
+             }
+          });
+
+        orderResult.reverse();
+
+        $.ajax({
+        type: 'POST',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            xhr.setRequestHeader('X-CSRFToken','{{ csrf_token }}');
+        },
+        data: {'orderResult[]': orderResult },
+    });
+
+
+
+
+
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>

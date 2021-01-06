@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+	<title>메인</title>
+	 <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+	 <style type="text/css">
+
+	* {
+ 	 	font-family: HanSans;
+   		background-color: #fffff8;
+	}
+
+	body {
+   		margin: 0;
+	}
+
+	.section {
+   		float: left;
+   		width: 100%;
+	}
+
+
+	#header-area {
+   		float: left;
+   	    margin: 0px;
+   }
+
+   #content-area {
+     padding-bottom:2%;
+   }
+
+    div.button{
+    	margin: auto;
+    	width: 70%;
+    }
+
+    #button{
+    	float: left;
+    	width: 40%;
+    	font-size: 25px;
+    	font-weight: bold;
+    	color: rgb(64, 64, 64);
+    	height: 200px;
+    	padding: 0px;
+    	background-color: rgb(237, 199, 195);
+    	border-radius:15%;
+    	border-style: none;
+ 	  	outline:none;
+ 	  	line-height: 200px;
+    }
+    #button:hover{
+		background-color: rgba(237, 151, 142, 0.99);
+    }
+
+    a{
+        text-decoration:none;
+        text-align:center;
+
+    }
+
+    .b1{
+
+    	margin-right: 10%;
+    	margin-bottom: 8%;
+    	margin-left: 5%;
+    }
+
+    .b2{
+
+    	margin-bottom: 8%;
+    }
+
+    .b3{
+    	margin-right: 10%;
+    	margin-left: 5%;
+    }
+
+    img{
+      padding-left: 50px;
+      padding-top: 10px;
+    }
+    .face {
+      float: right;
+      margin-right:75px;
+      margin-top:35px;
+      text-decoration-line: none;
+      color: black;
+      background-color: rgba(237, 151, 142, 0.99);
+      border-radius: 5px;
+    }
+    .face:hover {
+      background-color: rgba(0, 0, 0, 0);
+    }
+
+     .main{
+    	float: right;
+    	width:3%;
+    	padding-right:30px;
+    	padding-top:25px;
+    }
+
+	 </style>
+</head>
+<body>
+
+<div id="header-area" class="section">
+	<a href="{% url 'index' %}"><img src="{% static 'img/tws.png' %}" width=8%; ></a>
+	<!--<a class="face" href="{% url 'photo:face' %}">얼굴인식 사진등록</a>-->
+</div>
+
+<div id="content-area" class="section">
+	<div class="button">
+        <a id="button" class="b1" href="{% url 'photo:product_add' %}"> 제품등록 </a>
+        <a id="button" class="b2"  href="{% url 'photo:product_change' %}"> 제품관리 </a>
+		<a id="button" class="b3"  href="{% url 'photo:product_control' %}"> 재고관리 </a>
+		<a id="button" class="b4"  href="{% url 'photo:product_real' %}"> 실시간 창고현황 </a>
+	</div>
+</div>
+
+</body>
+
+</html>

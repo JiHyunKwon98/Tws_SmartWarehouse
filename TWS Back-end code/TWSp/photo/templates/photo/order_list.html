@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+
+
+   <title>제품관리-1</title>
+    <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+    <style type="text/css">
+
+
+   * {
+        font-family: HanSans;
+   }
+
+   body {
+         margin: 0;
+   }
+
+   .section {
+         float: left;
+         width: 100%;
+   }
+
+
+
+    .main{
+       float: right;
+       width:2.6%;
+       padding-right:75px;
+       padding-top:20px;
+    }
+
+   #content-area {
+        padding-top:2%;
+      width: 92%;
+      margin: 0 auto;
+      padding-left:8%;
+
+   }
+
+
+   #product{
+    vertical-align:middle;
+    margin-top:10px;
+
+   }
+
+   .pimage{
+      margin-left:7%;
+      margin-right: 2%;
+   }
+
+   p{
+    display: inline-block;
+    vertical-align:middle;
+    text-align: center;
+    font-size: 18px;
+    margin-right: 2%;
+   }
+
+  .srow{
+
+    margin-top:10px;
+    display: inline-block;
+    padding-top:10px;
+
+
+  }
+
+  .d{
+    display: inline-block;
+    text-align: center;
+
+  }
+
+
+   .del{
+       text-decoration:none;
+       color:black;
+   }
+
+  .detail{
+      padding:3px;
+      color:rgb(86, 187, 255);
+      font-size: 15px;
+      border-radius: 10%;
+      outline: 0;
+      border:1px solid rgb(86, 187, 255);
+      background-color: white;
+
+  }
+
+  .detail:hover{
+    color:white;
+    background-color:rgb(86, 187, 255);
+  }
+
+  .n{
+     font-size:15px;
+     margin-left:100px;
+  }
+
+
+  .b{
+      border: none;
+      font-size: 15px;
+      outline:none;
+      text-align: center;
+      background-color: transparent ;
+      text-decoration:none;
+      color:black;
+      padding:0 20px;
+    }
+
+
+
+
+     .menu{
+        width:100%;
+        text-align:center;
+      }
+
+  .b:hover{
+     color: white;
+     background-color: rgb(231, 76, 60);
+    }
+
+    a{
+         text-decoration:none;
+    }
+
+    .ju{
+    background:rgba(241, 144, 59, 0.65);
+    color:white;
+    float:right;
+    padding:5px;
+    margin-right:5%;
+    margin-top:1%;
+    }
+ #box{
+    border:none;
+    float: left;
+    width:95%;
+    margin-bottom: 3%;
+    margin-right: 5%;
+
+   }
+    table {
+        width: 100%;
+
+        border-collapse: collapse;
+      }
+      th{
+        background-color:rgb(237, 199, 195);
+      }
+
+      td{
+        background-color:#fffff8;
+      }
+
+      th, td {
+
+        padding: 6px;
+        text-align: center;
+      }
+
+
+
+      .n{
+        text-align:center;
+        width: 15px; height: 15px;
+        background-color:rgb(246, 221, 122);
+        font-size:3px;
+        color:rgb(246, 221, 122, 0);
+      }
+    #st{
+        text-align:center;
+        width: 15px; height: 15px;
+        background-color:rgb(246, 221, 122);
+        font-size:3px;
+        color:rgb(246, 221, 122, 0);
+      }
+      .m{
+        text-align:center;
+        width: 15px; height: 15px;
+        background-color:rgb(239, 132, 120);
+        font-size:3px;
+        color:rgb(246, 221, 122, 0);
+      }
+
+      .k{
+        text-align:center;
+        width: 15px; height: 15px;
+        background-color:rgb(135, 232, 176);
+        font-size:3px;
+        color:rgb(246, 221, 122, 0);
+      }
+
+
+      .out{
+        width: 15px; height: 15px;
+        background-color: rgb(239, 132, 120);
+
+      }
+
+      .in{
+        width: 15px; height: 15px;
+        background-color: rgb(246, 221, 122);
+
+      }
+
+      .ok{
+        width: 15px; height: 15px;
+        background-color: rgb(135, 232, 176);
+      }
+
+         #header-area {
+   		float: left;
+   		height:30%;
+   		margin:auto;
+   		text-align:center;
+   		font-size:18px;
+   		line-height:30%;
+   		padding-top: 8px;
+        background: linear-gradient(rgb(237, 199, 195),#fffff8 );
+
+   }
+
+   .name{
+        float:left;
+    	padding-left:5%;
+    	padding-top:2%;
+   }
+
+  .main{
+    	float:right;
+    	width:2.6%;
+    	padding-right:5%;
+    	padding-top:12px;
+
+    }
+    .lo{
+        padding-right:5%;
+   }
+   .st{
+    padding:0px;
+    color:rgb(246, 221, 122, 0);
+    font-size:1px;
+   }
+
+
+
+    h5{
+    font-weight:normal;
+    float:left;
+    margin:auto;
+
+    }
+
+    .store{
+    width:8%;
+    }
+
+    .s{
+    float:right;
+    padding:5px;
+    margin-right:3%;
+    margin-top:1%;
+
+    text-decoration:none;
+     background:#A5DF00;
+    color:white;
+
+    }
+    .me{
+        width: 15px; height: 15px;
+        background-color: rgb(246, 221, 122);
+
+      }
+
+
+
+    </style>
+</head>
+<body>
+
+<div id="header-area" class="section">
+    <span class="name">제품 관리</span>
+  <span><a href="{% url 'index' %}"><img src="{% static 'img/tws.png' %}" width=8%; class="lo" align="center"></a></span>
+   <span>   <a href="{% url 'photo:main' %}"><img src="{% static 'img/home.png' %}"  class="main"></a></span>
+</div>
+
+<hr>
+<div class="menu">
+      <a id="button" class="b" href="{% url 'photo:product_add' %}">&nbsp;제품등록&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_change' %}">&nbsp;제품관리&nbsp;</a>
+      <a id="button" class="b" href="{% url 'photo:product_control' %}">&nbsp;재고관리&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_real' %}">&nbsp;실시간 창고현황&nbsp;</a>
+  </div>
+
+<hr>
+<div id="content-area" class="section">
+
+    <a class="ju" href="{% url 'photo:product_change' %}">제품 정렬</a>
+
+    <a  class="s"href="{% url 'photo:order_product' %}" target="_blank"
+    onClick="window.open(this.href, '', 'width=300, height=300'); return false;"
+    >주문처리</a>
+
+  준비 - <p class="me"> </p>입고 - <p class="out"> </p> 출고 - <p class="ok"> </p>
+<br>
+    <br>
+<div id="box">
+    <table id="able">
+      <thead>
+        <tr>
+          <th>주문번호</th> <th>이름</th><th>주소</th><th>연락처</th><th>배송메모</th>
+            <th>처리상태 - 주문제품</th>
+            <!--<th>보관장소</th>-->
+            <th>삭제</th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+
+      {% for item in object_list %}
+        <tr>
+          <td>{{ item.id }}</td><td>{{ item.oname }}</td><td>{{ item.oaddress }}</td><td>{{ item.ocall }}</td>
+            <td>{{ item.omemo }}</td>
+
+            <td>{% for order_product in item.order_product_set.all %}
+                <h5 class="st">{{order_product.product.put}}</h5>
+                <span class="st">{{order_product.product.release}}</span>
+                <p id="st" class="mo" ></p>- {{ order_product.product }}
+            {% endfor %}</td>
+
+            <!--<td>{% for order_product in item.order_product_set.all %}
+             <form action="" method="post">{% csrf_token %}
+                <input type="submit" name="{{order_product.product.pstore}}" value="{{order_product.product.pstore}}" />
+            </form>
+        {% endfor %}</td>
+-->
+           <td> <a href="{% url 'photo:order_delete' item.id %}" class="del">X</a></td>
+        </tr>
+      {% endfor %}
+
+      </tbody>
+    </table>
+</div>
+
+</div>
+
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+var arrayResult = [];
+var cells = Array.prototype.slice.call(document.getElementById("able").getElementsByTagName("h5"));
+
+cells.forEach(function logArrayElements(element, index, array) {
+         if (element.innerText && element.innerText != "undefined") {
+           arrayResult.unshift(element.innerText);
+         }
+       });
+
+arrayResult.reverse();
+    for(var i= 0; i< arrayResult.length; i++){
+            if(arrayResult[i]=="0"){
+                  $('td>p').eq(i).css("background-color","rgb(246, 221, 122)" );
+            }
+           if(arrayResult[i]=="1"){
+                  $('td>p').eq(i).css("background-color","rgb(239, 132, 120)"  );
+            }
+
+        }
+
+
+var reResult = [];
+var re = Array.prototype.slice.call(document.getElementById("able").getElementsByTagName("span"));
+
+re.forEach(function logArrayElements(element, index, array) {
+         if (element.innerText && element.innerText != "undefined") {
+           reResult.unshift(element.innerText);
+         }
+       });
+reResult.reverse();
+  for(var i= 0; i< reResult.length; i++){
+            if(reResult[i]=="1"){
+                  $('td>p').eq(i).css("background-color","rgb(135, 232, 176)" );
+            }
+
+        }
+
+
+
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% load widget_tweaks %}
+
+<head>
+	<title>주문자 입력</title>
+	 <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+	 <style type="text/css">
+
+	* {
+ 	 	font-family: HanSans;
+	}
+
+	body {
+   		margin: 0;
+	}
+
+	.section {
+   		float: left;
+   		width: 100%;
+	}
+
+
+	#header-area {
+   		float: left;
+   		height: 30%;
+   		margin:0px;
+   		font-size:18px;
+   		line-height: 30%;
+   		padding-top:8px;
+        background: linear-gradient(rgb(237, 199, 195),#fffff8 );
+
+   }
+
+   span{
+    	padding-left: 50px;
+    }
+
+    .main{
+    	float: right;
+    	width:2.6%;
+    	padding-right:75px;
+    	padding-top:20px;
+    }
+
+   #content-area {
+     	padding-top:2%;
+
+   }
+
+
+
+  input[type="text"]{
+	  border-bottom:0.7px solid gray;
+   	  border-top:none;
+   	  border-left:none;
+      border-right:none;
+      outline: none;
+      width: 15%;
+    }
+   .submit {
+      color:rgb(251, 215, 134);
+      padding: 10px 40px;
+      font-size: 20px;
+      border-radius: 2px;
+      outline: 0;
+      border:1px solid rgb(251, 215, 134);
+      background-color: white;
+         }
+
+	.submit:hover{
+		color:white;
+		background-color:rgb(251, 215, 134);
+	}
+
+
+    #form-area {
+        margin: auto;
+       width: 50%;
+       font-size:15px;
+   }
+
+   input[type="text"]{
+     border-bottom:0.7px solid gray;
+     border-top:none;
+     border-left:none;
+     border-right:none;
+     outline: none;
+     width:30%;
+
+    }
+
+   .test{
+    margin-left:22.5%;
+    width:77.5%;
+    }
+
+    #header-area {
+   		float: left;
+   		height:30%;
+   		margin:auto;
+   		text-align:center;
+   		font-size:18px;
+   		line-height:30%;
+   		padding-top: 8px;
+        background: linear-gradient(rgb(237, 199, 195),#fffff8 );
+
+   }
+
+   .name{
+        float:left;
+    	padding-left:5%;
+    	padding-top:2%;
+   }
+
+  .main{
+    	float:right;
+    	width:2.6%;
+    	padding-right:5%;
+    	padding-top:12px;
+
+    }
+    .lo{
+        padding-right:10%;
+   }
+
+   .ctrl{
+        font-size:12px;
+        color:rgb(52, 73, 94);
+        font-weight: bold;
+   }
+
+
+	</style>
+
+</head>
+<body>
+
+<div id="header-area" class="section">
+    <span class="name">주문자 정보입력</span>
+  <span><a href="{% url 'index' %}"><img src="{% static 'img/tws.png' %}" width=8%; class="lo" align="center"></a></span>
+   <span>   <a href="{% url 'photo:index' %}"><img src="{% static 'img/home.png' %}"  class="main"></a></span>
+</div>
+
+
+
+<div id="content-area" class="section">
+
+    <div id="form-area">
+    {% if form.erros %}
+    <div class="alert alert-danger">
+        <div class="font-weight-bold">Wrong! Please correct the error(s) below</div>
+        {{ form.errors }}
+    </div>
+    {% endif %}
+
+
+    <div class="si">
+     <form action="." method="post" class="f">
+   {% csrf_token %}
+         <div class="test">
+         <div class="form-group row">
+             {{form.product|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold"}}
+             <span class="col-sm-2" >
+                {{ form.product|add_class:"form-control"|attr:"id:pname" }}
+             </span>
+
+         </div>
+
+            <p class="ctrl"> * Ctrl 누른 상태로 클릭하면 여러 제품 주문이 가능합니다.</p>
+
+
+         <div class="form-group row" id="sg" class="sg2">
+              {{ form.oname|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+                <span class="col-sm-5" >
+                    {{ form.oname|add_class:"form-control"|attr:"autofocus"|attr:"id:oname" }}
+                </span>
+         </div>
+
+         <br>
+         <div class="form-group row" id="sg" class="sg3>
+              {{ form.ocall|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+                <span class="col-sm-5" id="text">
+                    {{ form.ocall|add_class:"form-control"|attr:"autofocus" }}
+                </span>
+         </div>
+
+         <br>
+         <div class="form-group row" id="sg" class="sg3>
+              {{ form.oaddress|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+                <span class="col-sm-5" id="text">
+                    {{ form.oaddress|add_class:"form-control"|attr:"autofocus" }}
+                </span>
+         </div>
+         <br>
+
+        <div class="form-group row" id="tx" class="sg4">
+              {{ form.oemail|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+                <span class="col-sm-5" id="text">
+                    {{ form.oemail|add_class:"form-control"|attr:"autofocus" }}
+                </span>
+         </div>
+            <br>
+        <div class="form-group row" id="tx" class="sg4">
+              {{ form.omemo|add_label_class:"col-form-label col-sm-2 ml-3 font-weight-bold" }}
+                <span class="col-sm-5" id="text">
+                    {{ form.omemo|add_class:"form-control"|attr:"autofocus" }}
+                </span>
+         </div>
+         <br>
+         <br>
+
+         <input class="submit" type="submit" value="완료" id="btn" >
+    </div>
+         <br>
+         <br>
+
+     </form>
+        </div>
+
+
+
+</div>
+
+</div>
+
+</body>
+
+
+</html>

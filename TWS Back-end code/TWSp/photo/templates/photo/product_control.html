@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% load widget_tweaks %}
+{% load sorl_thumbnail %}
+<head>
+  <title>재고관리</title>
+   <meta content="width=device-width, initial-scale=1, user-scalable=0" charset="UTF-8">
+   <style type="text/css">
+
+
+  * {
+ 	 	font-family: HanSans;
+	}
+
+	body {
+   		margin: 0;
+	}
+
+	.section {
+   		float: left;
+   		width: 100%;
+	}
+
+
+
+   span{
+      padding-left: 50px;
+    }
+
+    .main{
+      float: right;
+      width:2.6%;
+      padding-right:75px;
+      padding-top:20px;
+    }
+
+   #content-area {
+      padding-top:2%;
+      width: 92%;
+      margin: 0 auto;
+      padding-left:8%;
+
+   }
+
+
+   #product{
+    vertical-align:middle;
+   }
+
+   .pimage{
+      margin-left:7%;
+      margin-right: 2%;
+   }
+
+   p{
+    display: inline-block;
+    vertical-align:middle;
+    text-align: center;
+    font-size: 18px;
+    width:30%;
+   }
+
+  .srow{
+
+    margin-top:10px;
+    display: inline-block;
+    padding-top:10px;
+  }
+
+  .d{
+    display: inline-block;
+    text-align: center;
+
+  }
+
+  .delete{
+      color:rgb(251, 215, 134);
+      font-size: 16px;
+      border-radius: 10%;
+      outline: 0;
+      border:1px solid rgb(251, 215, 134);
+      background-color: white;
+  }
+
+
+  .delete:hover{
+    color:white;
+    background-color: rgb(251, 215, 134);
+  }
+
+  .detail{
+      color:rgb(86, 187, 255);
+      font-size: 15px;
+      border-radius: 10%;
+      outline: 0;
+      border:1px solid rgb(86, 187, 255);
+      background-color: white;
+
+  }
+
+  .detail:hover{
+    color:white;
+    background-color:rgb(86, 187, 255);
+  }
+
+  .n{
+     font-size:20px;
+     font-weight: bold;
+  }
+
+  #th{
+   padding-left:56%;
+  }
+
+.h{
+  font-weight: bold;
+  font-size: 20px;
+  color: rgb(35, 42, 48);
+  margin-right:15.5%;
+  margin-left:4%;
+
+}
+
+  #fh{
+   width: 30%;
+  }
+
+.f{
+  font-size: 20px;
+  color: rgb(35, 42, 48);
+  margin-left:1%;
+  margin-right:10%;
+
+}
+
+  .b{
+      border: none;
+      font-size: 15px;
+      outline:none;
+      text-align: center;
+      background-color: transparent ;
+      text-decoration:none;
+      color:black;
+      padding:0 20px;
+    }
+
+
+     .menu{
+        width:100%;
+        text-align:center;
+      }
+  .b:hover{
+     color: white;
+     background-color: rgb(231, 76, 60);
+    }
+
+             #header-area {
+   		float: left;
+   		height:30%;
+   		margin:auto;
+   		text-align:center;
+   		font-size:18px;
+   		line-height:30%;
+   		padding-top: 8px;
+        background: linear-gradient(rgb(237, 199, 195),#fffff8 );
+
+   }
+
+   .name{
+        float:left;
+    	padding-left:5%;
+    	padding-top:2%;
+   }
+
+  .main{
+    	float:right;
+    	width:2.6%;
+    	padding-right:5%;
+    	padding-top:12px;
+
+    }
+    .lo{
+        padding-right:5%;
+   }
+
+
+  </style>
+
+</head>
+<body>
+
+<div id="header-area" class="section">
+    <span class="name">재고 관리</span>
+  <span><a href="{% url 'index' %}"><img src="{% static 'img/tws.png' %}" width=8%; class="lo" align="center"></a></span>
+   <span>   <a href="{% url 'photo:main' %}"><img src="{% static 'img/home.png' %}"  class="main"></a></span>
+</div>
+
+<hr>
+<div class="menu">
+      <a id="button" class="b" href="{% url 'photo:product_add' %}">&nbsp;제품등록&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_change' %}">&nbsp;제품관리&nbsp;</a>
+      <a id="button" class="b" href="{% url 'photo:product_control' %}">&nbsp;재고관리&nbsp;</a>
+      <a id="button" class="b"  href="{% url 'photo:product_real' %}">&nbsp;실시간 창고현황&nbsp;</a>
+  </div>
+
+<hr>
+
+<div id="content-area" class="section">
+
+<div id="th">
+  <a class="h">입고</a> <a class="h">출고</a>  <a class="h">재고</a>
+</div>
+
+    {% for item in object_list %}
+<div id="product">
+
+  <a class="n">{{ item.id }}</a>
+     {% thumbnail item.pimage "128x128" crop="center" as im %}
+            <img src="{{ im.url }}" class="pimage" width=11.5%; align="middle">
+     {% endthumbnail %}
+ <p>
+
+   <a name="pname">{{ item.pname }}</a> |
+   <a name="pcost">{{ item.pcost }}</a>  |
+   <a name="pstore">{{ item.pstore }} 구역 </a>&nbsp;&nbsp;
+
+</p>
+
+<span id="fh">
+
+   <a name="put" class="f">{{ item.put }}</a>
+   <a name="release" class="f">{{ item.release }}</a>
+   <a name="stock" class="f">{{ item.stock }}</a>
+
+</span>
+
+</div>
+
+<br>
+    <br>
+    {% endfor %}
+
+</div>
+
+</body>
+
+</html>
