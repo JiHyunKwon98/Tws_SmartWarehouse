@@ -8,6 +8,59 @@ from photo.forms import ProductInlineFormSet
 import json
 import datetime
 
+# import wiringpi as wiringpi
+# import time
+# import RPi.GPIO as GPIO
+# from mfrc522 import SimpleMFRC522
+# from board import SCL, SDA
+# import busio
+# from adafruit_pca9685 import PCA9685
+# from adafruit_motor import servo
+# # wiringpi GPIO setup
+# wiringpi.wiringPiSetupGpio()
+#
+# # wiring pi GPIO setup
+# wiringpi.pinMode(19, 1)  # relayA output
+# wiringpi.pinMode(16, 1)  # relayB output
+# wiringpi.pinMode(26, 1)  # relayC output
+# wiringpi.pinMode(20, 1)  # num1   output
+# wiringpi.pinMode(21, 1)  # num2   output
+#
+# # create pca9685 instance
+# i2c = busio.I2C(SCL, SDA)
+#
+# # create a simple PCA9685 class instance.
+# pca = PCA9685(i2c)
+#
+# # set pwm signal frequency 50Hz
+# pca.frequency = 50
+# # servo motor channel from 6 to 14
+# # attribute : fraction(0.0 ~ 1.0), angle(0 ~ 180)
+# servo6 = servo.ContinuousServo(pca.channels[6])
+# servo7 = servo.ContinuousServo(pca.channels[7])
+# servo8 = servo.ContinuousServo(pca.channels[8])
+# servo9 = servo.ContinuousServo(pca.channels[9])
+# servo10 = servo.ContinuousServo(pca.channels[10])
+# servo11 = servo.ContinuousServo(pca.channels[11])
+# servo12 = servo.ContinuousServo(pca.channels[12])
+# servo13 = servo.ContinuousServo(pca.channels[13])
+# servo14 = servo.ContinuousServo(pca.channels[14])
+# # create 'SimpleMFRC522' object
+# reader = SimpleMFRC522()
+# # GPIO의 사용할 pin Mode 설정
+# # BCM : GPIO 번호, BOARD : 물리적번호
+# # GPIO.setmode(GPIO.BOARD)
+# def servo_control(count):
+#     if count % 3 == 1:  # count is 1
+#         wiringpi.digitalWrite(20, 0)  # num1   output
+#         wiringpi.digitalWrite(21, 0)  # num2   output
+#     elif count % 3 == 2:  # count is 2
+#         wiringpi.digitalWrite(20, 0)  # num1   output
+#         wiringpi.digitalWrite(21, 1)  # num2   output
+#     else:
+#         wiringpi.pinMode(20, 1)  # num1   output
+#         wiringpi.pinMode(21, 0)  # num2   output
+
 class CategoryLV(ListView):
     model = Category
 
@@ -48,7 +101,7 @@ def Order_Product(request):
     store_list = Order.objects.all()
     context = {'store_list': store_list}
     store = request.POST.getlist('storeResult[]')
-
+    # count = 1  # release count
 
     for i in store:
         if i == "A1": #받아온 보관장소가 A1 일때
@@ -58,7 +111,17 @@ def Order_Product(request):
                 a1.release += 1  # 출고 +1 재고 -1 즉 이미 처리 된 주문은 계산이 중복해서 일어나지 않도록
                 a1.stock -= 1
                 a1.save()
-
+                # servo6.fraction = 0.25  # move front
+                # time.sleep(5)
+                # servo_control(count)
+                # wiringpi.digitalWrite(19, 1)  # relayA output
+                # wiringpi.digitalWrite(16, 0)  # relayB output
+                # wiringpi.digitalWrite(26, 0)  # relayC output
+                # servo6.fraction = 0.75  # move back
+                # time.sleep(5)
+                # servo6.fraction = 0.5  # stop
+                # time.sleep(10)  #
+                # count += 1
 
         elif i == "A2":
             a2 = Product.objects.get(pstore="A2")
@@ -67,6 +130,17 @@ def Order_Product(request):
                 a2.release+=1
                 a2.stock-=1
                 a2.save()
+                # servo7.fraction = 0.25  # move front
+                # time.sleep(5)
+                # servo_control(count)
+                # wiringpi.digitalWrite(19, 1)  # relayA output
+                # wiringpi.digitalWrite(16, 0)  # relayB output
+                # wiringpi.digitalWrite(26, 0)  # relayC output
+                # servo7.fraction = 0.75  # move back
+                # time.sleep(5)
+                # servo7.fraction = 0.5  # stop
+                # time.sleep(10)
+                # count += 1
 
         elif i == "A3":
             a3 = Product.objects.get(pstore="A3")
@@ -75,6 +149,17 @@ def Order_Product(request):
                 a3.release += 1
                 a3.stock -= 1
                 a3.save()
+                # servo8.fraction = 0.25  # move front
+                # time.sleep(5)
+                # servo_control(count)
+                # wiringpi.digitalWrite(19, 1)  # relayA output
+                # wiringpi.digitalWrite(16, 0)  # relayB output
+                # wiringpi.digitalWrite(26, 0)  # relayC output
+                # servo8.fraction = 0.75  # move back
+                # time.sleep(5)
+                # servo8.fraction = 0.5  # stop
+                # time.sleep(10)
+                # count += 1
 
         elif i == "B1":
             b1 = Product.objects.get(pstore="B1")
@@ -83,6 +168,17 @@ def Order_Product(request):
                 b1.release+=1
                 b1.stock-=1
                 b1.save()
+                # servo9.fraction = 0.25  # move front
+                # time.sleep(5)
+                # servo_control(count)
+                # wiringpi.digitalWrite(19, 0)  # relayA output
+                # wiringpi.digitalWrite(16, 1)  # relayB output
+                # wiringpi.digitalWrite(26, 0)  # relayC output
+                # servo9.fraction = 0.75  # move back
+                # time.sleep(5)
+                # servo9.fraction = 0.5  # stop
+                # time.sleep(10)
+                # count += 1
 
         elif i == "B2":
             b2 = Product.objects.get(pstore="B2")
@@ -91,6 +187,17 @@ def Order_Product(request):
                 b2.release+=1
                 b2.stock-=1
                 b2.save()
+                # servo10.fraction = 0.25  # move front
+                # time.sleep(5)
+                # servo_control(count)
+                # wiringpi.digitalWrite(19, 0)  # relayA output
+                # wiringpi.digitalWrite(16, 1)  # relayB output
+                # wiringpi.digitalWrite(26, 0)  # relayC output
+                # servo10.fraction = 0.75  # move back
+                # time.sleep(5)
+                # servo10.fraction = 0.5  # stop
+                # time.sleep(10)
+                # count += 1
 
         elif i == "B3":
             b3 = Product.objects.get(pstore="B3")
@@ -99,6 +206,17 @@ def Order_Product(request):
                 b3.release += 1
                 b3.stock -= 1
                 b3.save()
+                # servo11.fraction = 0.25  # move front
+                # time.sleep(4)
+                # servo_control(count)
+                # wiringpi.digitalWrite(19, 0)  # relayA output
+                # wiringpi.digitalWrite(16, 1)  # relayB output
+                # wiringpi.digitalWrite(26, 0)  # relayC output
+                # servo11.fraction = 0.75  # move back
+                # time.sleep(4)
+                # servo11.fraction = 0.5  # stop
+                # time.sleep(10)
+                # count += 1
 
         elif i == "C1":
             c1 = Product.objects.get(pstore="C1")
@@ -107,6 +225,17 @@ def Order_Product(request):
                 c1.release+= 1
                 c1.stock-= 1
                 c1.save()
+                # servo12.fraction = 0.30  # move front
+                # time.sleep(4)
+                # servo_control(count)
+                # wiringpi.digitalWrite(19, 0)  # relayA output
+                # wiringpi.digitalWrite(16, 0)  # relayB output
+                # wiringpi.digitalWrite(26, 1)  # relayC output
+                # servo12.fraction = 0.70  # move back
+                # time.sleep(4)
+                # servo12.fraction = 0.5  # stop
+                # time.sleep(12)
+                # count += 1
 
         elif i == "C2":
             c2 = Product.objects.get(pstore="C2")
@@ -115,6 +244,17 @@ def Order_Product(request):
                 c2.release += 1
                 c2.stock -= 1
                 c2.save()
+                # servo13.fraction = 0.25  # move front
+                # time.sleep(6)
+                # servo_control(count)
+                # wiringpi.digitalWrite(19, 0)  # relayA output
+                # wiringpi.digitalWrite(16, 0)  # relayB output
+                # wiringpi.digitalWrite(26, 1)  # relayC output
+                # servo13.fraction = 0.75  # move back
+                # time.sleep(5)
+                # servo13.fraction = 0.5  # stop
+                # time.sleep(12)
+                # count += 1
 
         elif i == "C3":
             c3 = Product.objects.get(pstore="C3")
@@ -123,16 +263,32 @@ def Order_Product(request):
                 c3.release += 1
                 c3.stock -= 1
                 c3.save()
+                # servo14.fraction = 0.25  # move front
+                # time.sleep(5)
+                # servo_control(count)
+                # wiringpi.digitalWrite(19, 0)  # relayA output
+                # wiringpi.digitalWrite(16, 0)  # relayB output
+                # wiringpi.digitalWrite(26, 1)  # relayC output
+                # servo14.fraction = 0.75  # move back
+                # time.sleep(5)
+                # servo14.fraction = 0.5  # stop
+                # time.sleep(10)
+                # count += 1
         else:
             print(0)
-
     order = request.POST.getlist('orderResult[]')
+    # ## system is ended
+    # wiringpi.digitalWrite(19, 0)  # relayA output 0
+    # wiringpi.digitalWrite(16, 0)  # relayB output 0
+    # wiringpi.digitalWrite(26, 0)  # relayC output 0
+    # wiringpi.digitalWrite(20, 0)  # num1   output
+    # wiringpi.digitalWrite(21, 0)  # num2   output
+    # ##
+
     for num in order:
         bn = Order.objects.get(pk=num)
         bn.no = num
         bn.save()
-
-
     return render(request,'photo/order_product.html', context)
 
 def Input_Product(request):
