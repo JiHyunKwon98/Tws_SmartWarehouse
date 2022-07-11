@@ -5,7 +5,7 @@
 
 ### position & team
 - SW 팀장 
-- 4명 ( SW 2명, HW 2명 )
+- 5명 ( SW 2명, HW 3명 )
 
 ### 결과보고서 
 <a href="https://drive.google.com/file/d/1fTZ1R9-sjrK2gTLWKZED2X7eGf5eHpQQ/view?usp=sharing"><img src="https://img.shields.io/badge/Google Drive-4285F4?style=for-the-badge&logo=Google Drive&logoColor=white"> 
